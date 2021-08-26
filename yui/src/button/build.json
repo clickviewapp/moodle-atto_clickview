@@ -1,0 +1,11 @@
+{
+  "name": "moodle-atto_clickview-button",
+  "builds": {
+    "moodle-atto_clickview-button": {
+      "jsfiles": [
+		"cv-events-api.js",
+        "button.js"
+      ]
+    }
+  }
+}
