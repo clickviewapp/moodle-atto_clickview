@@ -1,18 +1,41 @@
 <?php
+// This file is part of Moodle - https://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+
+/**
+ * Atto ClickView plugin library functions.
+ *
+ * @package     atto_clickview
+ * @copyright   2021 ClickView Pty. Limited <info@clickview.com.au>
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Return the js params required for this module.
+ *
+ * @return array of additional params to pass to javascript init function for this module.
+ * @throws moodle_exception
+ */
 function atto_clickview_params_for_js($elementid, $options, $fpoptions) {
-	$params = array(
-		'onlineUrl' => '//<~onlineHost~>',
-		'consumerKey' => '<~consumerKey~>',
-		'schoolId' => '',
-		'allowIframe' => false
-	);
-	
-	if (!empty($options['legacy']) or !empty($options['noclean']) or !empty($options['trusted'])) {
-            $params['allowIframe'] = true;
-        }
-	
+    $config = get_config('local_clickview');
+
+    foreach ($config as $key => $value) {
+        $params[$key] = $value;
+    }
+
 	return $params;
 }
