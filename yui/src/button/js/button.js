@@ -31,6 +31,8 @@
  * @extends M.editor_atto.EditorPlugin
  */
 
+var COMPONENTNAME = 'atto_clickview';
+
 Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
 	initializer: function (params) {
 		this._onlineUrl = params.hostlocation;
@@ -43,14 +45,22 @@ Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto
 			iconurl: this._onlineUrl + '/Assets/images/icons/cv-logo.png',
 			tags: 'iframe',
 			icon: 'icon',
-			iconComponent: 'atto_clickview'
+			iconComponent: COMPONENTNAME
 		});
 	},
+
+    /**
+     * Display the ClickView embed tool.
+     *
+     * @method _displayDialogue
+     * @private
+     */
 	_displayDialog: function () {
 		var dialog = this.getDialogue({
+            headerContent: M.util.get_string('pluginname', COMPONENTNAME),
 			width: '824px'
 		});
-		dialog.set('headerContent', 'ClickView Plugin for Atto');
+
 		dialog.set('bodyContent', '<iframe id="cv-plugin-frame" src="' + this._onlineUrl + this._iframeUrl + '?consumerKey=' + this._consumerKey + '&schoolId=' + this._schoolId +'" width="800" height="494" frameborder="0"></iframe>').show();
 		
 		var host = this.get('host');

@@ -25,17 +25,35 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
+ * Initialise the js strings required for this module.
+ */
+function atto_clickview_strings_for_js() {
+    global $PAGE;
+
+    $strings = [
+            'pluginname',
+    ];
+
+    $eventsapiurl = get_config('local_clickview', 'eventsapi');
+
+    $PAGE->requires->strings_for_js($strings, 'atto_clickview');
+    $PAGE->requires->js(new moodle_url($eventsapiurl));
+}
+
+/**
  * Return the js params required for this module.
  *
  * @return array of additional params to pass to javascript init function for this module.
  * @throws moodle_exception
  */
 function atto_clickview_params_for_js($elementid, $options, $fpoptions) {
+    $params = [];
+
     $config = get_config('local_clickview');
 
     foreach ($config as $key => $value) {
         $params[$key] = $value;
     }
 
-	return $params;
+    return $params;
 }
