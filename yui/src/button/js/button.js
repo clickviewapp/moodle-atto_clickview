@@ -31,52 +31,101 @@
  * @extends M.editor_atto.EditorPlugin
  */
 
-var COMPONENTNAME = 'atto_clickview';
+var COMPONENTNAME = 'atto_clickview',
+    TEMPLATE = '<iframe id="{{component}}_iframe" src="{{url}}" width="800" height="494" frameborder="0"></iframe>';
 
 Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
-	initializer: function (params) {
-		this._onlineUrl = params.hostlocation;
-		this._iframeUrl = params.iframeurl;
-		this._consumerKey = params.consumerkey;
-		this._schoolId = params.schoolid;
+    initializer: function (params) {
+        this._onlineUrl = params.hostlocation;
+        this._iframeUrl = params.iframeurl;
+        this._consumerKey = params.consumerkey;
+        this._schoolId = params.schoolid;
 
-		this.addButton({
-			icon: 'icon',
-			iconComponent: COMPONENTNAME,
-			callback: this._displayDialog,
-			tags: 'iframe',
-		});
-	},
+        this.addButton({
+            icon: 'icon',
+            iconComponent: COMPONENTNAME,
+            callback: this._displayDialogue,
+            tags: 'iframe',
+        });
+    },
 
     /**
-     * Display the ClickView embed tool.
+     * Display the embed tool.
      *
      * @method _displayDialogue
      * @private
      */
-	_displayDialog: function () {
-		var dialog = this.getDialogue({
+    _displayDialogue: function() {
+        var self, dialogue, pluginFrame, eventsApi;
+
+        self = this;
+
+        dialogue = this.getDialogue({
             headerContent: M.util.get_string('pluginname', COMPONENTNAME),
-			width: '824px'
-		});
+            width: 'auto',
+            focusAfterHide: true
+        });
 
-		dialog.set('bodyContent', '<iframe id="cv-plugin-frame" src="' + this._onlineUrl + this._iframeUrl + '?consumerKey=' + this._consumerKey + '&schoolId=' + this._schoolId +'" width="800" height="494" frameborder="0"></iframe>').show();
-		
-		var host = this.get('host');
-		var self = this;
+        dialogue.set('bodyContent', this._getDialogueContent()).show();
 
-		var pluginFrame = document.getElementById('cv-plugin-frame');
-		var eventsApi = new CVEventsApi(pluginFrame.contentWindow);
-		eventsApi.on('cv-lms-addvideo', function (event, detail) {
-			host.insertContentAtFocusPoint(detail.embedHtml);
-			dialog.hide();
-			eventsApi.off('cv-lms-addvideo');
-			self.markUpdated();
-		}, true);
-		
-		dialog.on('visibleChange', function(event) {
-			if(event.newVal !== false) return;
-			eventsApi.off('cv-lms-addvideo');
-		});
-	}
+        pluginFrame = document.getElementById(COMPONENTNAME + '_iframe');
+        eventsApi = new CVEventsApi(pluginFrame.contentWindow);
+
+        eventsApi.on('cv-lms-addvideo', function(event, detail) {
+            self._insertVideo(detail.embedHtml);
+            eventsApi.off('cv-lms-addvideo');
+        }, true);
+
+        dialogue.on('visibleChange', function(event) {
+            if (event.newVal !== false) {
+                return;
+            }
+
+            eventsApi.off('cv-lms-addvideo');
+        });
+    },
+
+    /**
+     * Insert the video.
+     *
+     * @method _insertVideo
+     * @param {String} html the video html embed code
+     * @private
+     */
+    _insertVideo: function(html) {
+        var host = this.get('host');
+
+        this.getDialogue({
+            focusAfterHide: null
+        }).hide();
+
+        host.insertContentAtFocusPoint(html);
+
+        this.markUpdated();
+    },
+
+    /**
+     * Return the dialogue content for the tool, attaching any required
+     * events.
+     *
+     * @method _getDialogueContent
+     * @return {Node} The content to place in the dialogue.
+     * @private
+     */
+    _getDialogueContent: function() {
+        var url, template;
+
+        url = this._onlineUrl + this._iframeUrl + '?consumerKey=' + this._consumerKey;
+
+        if (this._schoolId) {
+            url += '&schoolId=' + this._schoolId;
+        }
+
+        template = Y.Handlebars.compile(TEMPLATE);
+
+        return Y.Node.create(template({
+                component: COMPONENTNAME,
+                url: url,
+            }));
+    }
 });
