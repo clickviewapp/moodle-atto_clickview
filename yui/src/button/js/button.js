@@ -41,11 +41,10 @@ Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto
 		this._schoolId = params.schoolid;
 
 		this.addButton({
-			callback: this._displayDialog,
-			iconurl: this._onlineUrl + '/Assets/images/icons/cv-logo.png',
-			tags: 'iframe',
 			icon: 'icon',
-			iconComponent: COMPONENTNAME
+			iconComponent: COMPONENTNAME,
+			callback: this._displayDialog,
+			tags: 'iframe',
 		});
 	},
 
