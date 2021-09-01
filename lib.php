@@ -26,6 +26,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Initialise the js strings required for this module.
+ *
+ * @throws moodle_exception
  */
 function atto_clickview_strings_for_js() {
     global $PAGE;
@@ -46,7 +48,7 @@ function atto_clickview_strings_for_js() {
  * @return array of additional params to pass to javascript init function for this module.
  * @throws moodle_exception
  */
-function atto_clickview_params_for_js($elementid, $options, $fpoptions) {
+function atto_clickview_params_for_js($elementid, $options, $fpoptions): array {
     $params = [];
 
     $config = get_config('local_clickview');
