@@ -22,6 +22,8 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_clickview\Utils;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -50,6 +52,8 @@ function atto_clickview_strings_for_js() {
  */
 function atto_clickview_params_for_js($elementid, $options, $fpoptions): array {
     $params = [];
+
+    $params['iframe'] = Utils::get_iframe_html();
 
     $config = get_config('local_clickview');
 

@@ -34,10 +34,12 @@ YUI.add('moodle-atto_clickview-button', function (Y, NAME) {
  */
 
 var COMPONENTNAME = 'atto_clickview',
-    TEMPLATE = '<iframe id="{{component}}_iframe" src="{{url}}" width="800" height="494" frameborder="0"></iframe>';
+    TEMPLATE = '';
 
 Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
     initializer: function (params) {
+        TEMPLATE = params.iframe;
+
         this._onlineUrl = params.hostlocation;
         this._iframeUrl = params.iframeurl;
         this._consumerKey = params.consumerkey;
