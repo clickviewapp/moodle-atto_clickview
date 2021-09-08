@@ -64,13 +64,13 @@ Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto
 
         dialogue = this.getDialogue({
             headerContent: M.util.get_string('pluginname', COMPONENTNAME),
-            width: 'auto',
+            width: '816',
             focusAfterHide: true
         });
 
         dialogue.set('bodyContent', this._getDialogueContent()).show();
 
-        pluginFrame = document.getElementById(COMPONENTNAME + '_iframe');
+        pluginFrame = document.getElementById('clickview_iframe');
         eventsApi = new CVEventsApi(pluginFrame.contentWindow);
 
         eventsApi.on('cv-lms-addvideo', function(event, detail) {

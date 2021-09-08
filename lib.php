@@ -38,10 +38,8 @@ function atto_clickview_strings_for_js() {
             'pluginname',
     ];
 
-    $eventsapiurl = get_config('local_clickview', 'eventsapi');
-
     $PAGE->requires->strings_for_js($strings, 'atto_clickview');
-    $PAGE->requires->js(new moodle_url($eventsapiurl));
+    $PAGE->requires->js(Utils::get_eventsapi_url());
 }
 
 /**
@@ -54,6 +52,8 @@ function atto_clickview_params_for_js($elementid, $options, $fpoptions): array {
     $params = [];
 
     $params['iframe'] = Utils::get_iframe_html();
+    $params['iframeurl'] = Utils::get_iframe_url();
+    $params['consumerkey'] = Utils::get_consumerkey();
 
     $config = get_config('local_clickview');
 
