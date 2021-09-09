@@ -46,9 +46,8 @@ function atto_clickview_strings_for_js() {
  * Return the js params required for this module.
  *
  * @return array of additional params to pass to javascript init function for this module.
- * @throws moodle_exception
  */
-function atto_clickview_params_for_js($elementid, $options, $fpoptions): array {
+function atto_clickview_params_for_js(): array {
     $params = [];
 
     $params['iframe'] = Utils::get_iframe_html();
