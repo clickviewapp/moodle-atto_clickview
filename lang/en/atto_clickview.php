@@ -24,3 +24,4 @@
  */
 
 $string['pluginname'] = 'Embed ClickView Video';
+$string['privacy:metadata'] = 'The atto_clickview plugin does not store any personal data.';
