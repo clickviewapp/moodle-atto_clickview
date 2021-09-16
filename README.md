@@ -1,8 +1,14 @@
 # Moodle ClickView atto editor plugin #
 
-TODO Describe the plugin shortly here.
+[![Moodle Plugin CI](https://github.com/clickviewapp/moodle-atto_clickview/actions/workflows/moodle-ci.yml/badge.svg?branch=main)](https://github.com/clickviewapp/moodle-atto_clickview/actions/workflows/moodle-ci.yml)
 
-TODO Provide more detailed description here.
+The ClickView atto editor plugin for Moodle enables you to quickly and safely browse through your entire ClickView library, the ClickView exchange and your own personal workspace from within Moodle.
+
+This makes it easy to embed educational videos using the [Atto editor](https://docs.moodle.org/311/en/Atto_editor) and share them with your course participants.
+
+## Requirements ##
+
+The plugin can only be installed if the plugin `local_clickview` is available.
 
 ## Installing via uploaded ZIP file ##
 
