@@ -33,6 +33,10 @@ Alternatively, you can run
 
 to complete the installation from the command line.
 
+## Subscription ##
+
+This plugin is only available to organizations with an active ClickView subscription. You can request a free trial here https://www.clickvieweducation.com/free-trial/.
+
 ## License ##
 
 2021 ClickView Pty. Limited <info@clickview.com.au>
