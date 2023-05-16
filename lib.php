@@ -24,8 +24,6 @@
 
 use local_clickview\Utils;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Initialise the js strings required for this module.
  *
