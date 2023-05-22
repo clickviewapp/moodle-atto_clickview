@@ -35,7 +35,7 @@ var COMPONENTNAME = 'atto_clickview',
     TEMPLATE = '';
 
 Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
-    initializer: function (params) {
+    initializer: function(params) {
         TEMPLATE = params.iframe;
 
         this._onlineUrl = params.hostlocation;
@@ -71,7 +71,7 @@ Y.namespace('M.atto_clickview').Button = Y.Base.create('button', Y.M.editor_atto
         dialogue.set('bodyContent', this._getDialogueContent()).show();
 
         pluginFrame = document.getElementById('clickview_iframe');
-        eventsApi = new CVEventsApi(pluginFrame.contentWindow);
+        eventsApi = new CVEventsApi(pluginFrame.contentWindow); /* global CVEventsApi */
 
         eventsApi.on('cv-lms-addvideo', function(event, detail) {
             self._insertVideo(detail.embedHtml);
