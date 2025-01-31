@@ -24,12 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2021083002;
+$plugin->version = 2021083003;
 $plugin->requires = 2018051700;
 $plugin->component = 'atto_clickview';
-$plugin->supported = [35, 402];
-$plugin->release = 'v3.5-r2 - v4.2-r1';
+$plugin->supported = [35, 405];
+$plugin->release = 'v3.5-r3 - v4.5-r1';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [
-        'local_clickview' => 2021083002
+        'local_clickview' => 2021083003
 ];
